@@ -21,6 +21,14 @@ if(cart.length === 0) {
     </div>
   `).join('');
 }
+
+fetch('api/products.php')
+  .then(res => res.json())
+  .then(products => {
+    const favs = JSON.parse(localStorage.getItem('favorites') || '[]');
+    const favProducts = products.filter(p => favs.includes(p.id));
+    // Render favProducts as cards or a list
+  });
 </script>
 <?php include __DIR__.'/components/foot.php'; ?>
 </body>

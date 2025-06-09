@@ -28,6 +28,7 @@ if (!id) {
           <p class="desc">${p.desc}</p>
           <div class="price">￥${p.price.toLocaleString()}</div>
           <button onclick="addToCart(${p.id}, '${p.name}', ${p.price})">カートに追加</button>
+          <button class="fav-btn" onclick="toggleFavorite(${p.id})">♡</button>
         </div>
       `;
     });
@@ -39,6 +40,18 @@ function addToCart(id, name, price) {
   else cart.push({id, name, price, qty:1});
   localStorage.setItem('cart', JSON.stringify(cart));
   alert('カートに追加しました');
+}
+function toggleFavorite(id) {
+  let favorites = JSON.parse(localStorage.getItem('favorites')||'[]');
+  const idx = favorites.indexOf(id);
+  if (idx === -1) {
+    favorites.push(id);
+    alert('お気に入りに追加しました');
+  } else {
+    favorites.splice(idx, 1);
+    alert('お気に入りから削除しました');
+  }
+  localStorage.setItem('favorites', JSON.stringify(favorites));
 }
 </script>
 <?php include __DIR__.'/components/foot.php'; ?>
