@@ -1,44 +1,42 @@
-const FeaturedProducts = () => {
-    // State to hold products, loading status, and errors
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+'use client';
 
-    // useEffect hook to fetch data when the component mounts
+import { useState, useEffect } from 'react';
+import { supabase } from '@/lib/supabaseClient';
+import ProductCard from './ProductCard';
+import { Product } from '@/context/CartContext';
+
+const FeaturedProducts = () => {
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
     useEffect(() => {
         const fetchProducts = async () => {
-            if (!supabase) {
-                setError("Supabaseクライアントが利用できません。ライブラリが読み込まれていることを確認してください。");
-                setLoading(false);
-                return;
-            }
-            if (supabaseUrl === 'YOUR_SUPABASE_URL' || supabaseAnonKey === 'YOUR_SUPABASE_ANON_KEY') {
-                setError("Supabaseの認証情報が設定されていません。");
-                setLoading(false);
-                return;
-            }
             try {
-                // For a Japanese site, ensure the data in your 'products' table (name, description, etc.) is in Japanese.
-                const { data, error } = await supabase
+                const { data, error: supabaseError } = await supabase
                     .from('products')
                     .select('*')
                     .limit(4);
 
-                if (error) {
-                    throw error;
-                }
+                if (supabaseError) throw supabaseError;
                 
-                setProducts(data);
-            } catch (error) {
-                setError(error.message);
-                console.error("Error fetching products:", error);
+                setProducts(data || []);
+            } catch (err) {
+                // Type guard to check if the error is an object with a message property
+                if (err instanceof Error) {
+                    setError(err.message);
+                    console.error("Error fetching products:", err.message);
+                } else {
+                    setError("予期せぬエラーが発生しました。"); // An unexpected error occurred.
+                    console.error("An unexpected error occurred:", err);
+                }
             } finally {
                 setLoading(false);
             }
         };
 
         fetchProducts();
-    }, []); // Empty dependency array means this effect runs once on mount
+    }, []);
 
     return (
       <section className="bg-gray-50 py-16 sm:py-24">
@@ -47,7 +45,6 @@ const FeaturedProducts = () => {
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">おすすめ商品</h2>
             <p className="mt-4 text-lg text-gray-600">あなたにぴったりの、選りすぐりのアイテム。</p>
           </div>
-          
           <div className="mt-12">
             {loading && <p className="text-center text-gray-600">商品を読み込み中...</p>}
             {error && <p className="text-center text-red-600">エラー: {error}</p>}
@@ -63,3 +60,5 @@ const FeaturedProducts = () => {
       </section>
     );
 };
+
+export default FeaturedProducts;
