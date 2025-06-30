@@ -1,5 +1,11 @@
+// postcss.config.mjs
+
 const config = {
-  plugins: ["@tailwindcss/postcss"],
+  plugins: {
+    'postcss-nesting': {}, // Use the correct package name here
+    tailwindcss: {},
+    autoprefixer: {},
+  },
 };
 
 export default config;
