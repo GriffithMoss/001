@@ -1,0 +1,35 @@
+{
+	"folders": [
+		{
+			"path": "../../../../Users/240046/Desktop/001/001"
+		},
+		{
+			"path": "../../japanese-stationery-store/node_modules"
+		},
+		{
+			"path": "../../japanese-stationery-store/public"
+		},
+		{
+			"path": "../../japanese-stationery-store/styles"
+		},
+		{
+			"path": "../../japanese-stationery-store/.next"
+		},
+		{
+			"path": "../../japanese-stationery-store/app"
+		},
+		{
+			"path": "../../japanese-stationery-store/components"
+		},
+		{
+			"path": "../../japanese-stationery-store/context"
+		},
+		{
+			"path": "../../japanese-stationery-store/hooks"
+		},
+		{
+			"path": "../../japanese-stationery-store/lib"
+		}
+	],
+	"settings": {}
+}

@@ -16,7 +16,7 @@ interface AuthContextType {
   isLoading: boolean
   error: string | null
 }
-//whatever
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: ReactNode }) {

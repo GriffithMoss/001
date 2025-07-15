@@ -11,6 +11,7 @@ import { getProductById } from "@/lib/products"
 import { useCart } from "@/context/cart-context"
 import { ProductCard } from "@/components/product-card"
 import { products } from "@/lib/products"
+import { WishlistButton } from "@/components/wishlist-button"
 
 export default function ProductDetailPage() {
   const params = useParams()
@@ -66,6 +67,10 @@ export default function ProductDetailPage() {
               <p className="text-2xl font-medium">
                 ¥{product.price.toLocaleString()} <span className="text-sm text-muted-foreground">（税込）</span>
               </p>
+
+              <div className="flex items-center gap-4">
+                <WishlistButton product={product} showText={true} variant="outline" size="default" />
+              </div>
 
               <div className="border-t border-b py-6">
                 <p className="text-muted-foreground whitespace-pre-line">{product.description}</p>

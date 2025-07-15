@@ -31,6 +31,9 @@ export function Footer() {
               <Link href="/login" className="hover:text-primary transition-colors">
                 ログイン
               </Link>
+              <Link href="/wishlist" className="hover:text-primary transition-colors">
+                お気に入り
+              </Link>
             </nav>
           </div>
 
