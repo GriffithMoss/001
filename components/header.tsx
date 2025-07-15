@@ -37,7 +37,7 @@ export function Header() {
             transition={{ type: "spring", stiffness: 300 }}
             className="text-2xl md:text-3xl font-serif tracking-wider"
           >
-            筆記具の夢
+            Stationary Link
           </motion.h1>
         </Link>
 
