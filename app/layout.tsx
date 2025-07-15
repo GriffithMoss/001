@@ -2,9 +2,8 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import { CartProvider } from "@/context/cart-context"
 import { AuthProvider } from "@/context/auth-context"
-import { ThemeProvider } from "@/components/theme-provider"
+import { CartProvider } from "@/context/cart-context"
 import { WishlistProvider } from "@/context/wishlist-context"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -23,13 +22,13 @@ export default function RootLayout({
   return (
     <html lang="ja" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <AuthProvider>
+        <AuthProvider>
+          <CartProvider>
             <WishlistProvider>
-              <CartProvider>{children}</CartProvider>
+              {children}
             </WishlistProvider>
-          </AuthProvider>
-        </ThemeProvider>
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   )
